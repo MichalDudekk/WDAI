@@ -1,3 +1,5 @@
+import createCardElement from "./createCardElement.js";
+
 async function searchMovies(query) {
     if (query === "") {
         return { results: [] };
@@ -26,9 +28,6 @@ async function searchMovies(query) {
     }
 }
 
-let prevQuery = "";
-const API_KEY = "TOP_SECRET";
-
 async function handleSearchInput() {
     const query = document.getElementById("searchInput").value;
     if (query !== prevQuery) {
@@ -39,31 +38,15 @@ async function handleSearchInput() {
         cardsContainer.innerHTML = "";
 
         json.results.map((movie) => {
-            const card = document.createElement("div");
-            card.className = "card";
-            const img = document.createElement("img");
-            img.src = movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : "temp.png";
-            const bottom = document.createElement("div");
-            bottom.className = "card-bottom";
-            const title = document.createElement("div");
-            title.className = "title";
-            title.innerText = `${movie.title} ⭐ ${
-                Math.round(movie.vote_average * 10) / 10
-            }`;
-            const bookmark = document.createElement("div");
-            bookmark.className = "bookmark";
-            bookmark.innerText = "🧾";
-
-            bottom.appendChild(title);
-            bottom.appendChild(bookmark);
-            card.appendChild(img);
-            card.appendChild(bottom);
+            const card = createCardElement(movie);
             cardsContainer.appendChild(card);
         });
     }
     setTimeout(handleSearchInput, 1000);
 }
+
+let prevQuery = "";
+const API_KEY = "TOP_SECRET";
+// daj do json
 
 handleSearchInput();

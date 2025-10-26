@@ -246,4 +246,9 @@ body {
     font-size: var(--small);
     width: 10%;
     text-align: center;
+    cursor: pointer;
+}
+
+.bookmarked {
+    color: #44cf6e;
 }
