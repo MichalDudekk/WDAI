@@ -243,12 +243,26 @@ body {
 }
 
 .cards .card .card-bottom .bookmark {
-    font-size: var(--small);
+    font-size: var(--large);
     width: 10%;
     text-align: center;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .bookmarked {
     color: #44cf6e;
+}
+
+.bookmarked:hover {
+    color: #44cf6e !important;
+}
+
+.cards .card .card-bottom .bookmark:hover {
+    color: #fff;
+}
+
+.message {
+    width: var(--content-width);
+    text-align: center;
 }

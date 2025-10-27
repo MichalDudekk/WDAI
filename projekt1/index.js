@@ -1,4 +1,5 @@
 import createCardElement from "./createCardElement.js";
+import API_KEY from "./API_KEY.js";
 
 async function searchMovies(query) {
     if (query === "") {
@@ -46,7 +47,5 @@ async function handleSearchInput() {
 }
 
 let prevQuery = "";
-const API_KEY = "TOP_SECRET";
-// daj do json
 
 handleSearchInput();
