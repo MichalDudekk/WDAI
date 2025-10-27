@@ -11,9 +11,10 @@ const createCardElement = (movie) => {
     bottom.className = "card-bottom";
     const title = document.createElement("div");
     title.className = "title";
-    title.innerText = `${movie.title} ⭐ ${
+
+    title.innerText = `${movie.title} ⭐ ${(
         Math.round(movie.vote_average * 10) / 10
-    }`;
+    ).toFixed(1)}`;
 
     const bookmark = document.createElement("div");
     bookmark.className = "bookmark";

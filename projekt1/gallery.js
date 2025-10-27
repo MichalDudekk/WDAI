@@ -7,8 +7,13 @@ async function displayBookmarkedMovies() {
     if (bookmarkedMovies.size === 0) {
         const message = document.createElement("div");
         message.classList.add("message");
-        message.innerHTML =
-            "<p>It looks like you haven't bookmarked any movies yet.</p>";
+        message.innerHTML = `
+        <p>It looks like you haven't bookmarked any movies yet.</p>
+        <!--
+        <video width="320" height="240" controls>
+            <source src="movie.mp4" type="video/mp4" />
+        </video>
+        -->`;
         cardsContainer.classList.remove("cards");
         cardsContainer.appendChild(message);
         return;
