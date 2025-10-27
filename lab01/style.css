@@ -1,16 +1,113 @@
 html {
-      background-color: #DDBEAA;
-      height: 100vh;
+  background-color: #ddbeaa;
+  height: 100vh;
 }
 
 body {
-      height: 100vh;
-      margin: 0;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .main-container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: aliceblue;
+  border-radius: 5px;
+  width: 60%;
+  height: auto;
+
+  padding: 10px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.container div {
+  display: flex;
+  justify-content: center;
+}
+
+.container table {
+  border-collapse: collapse;
+  width: 80%;
+
+  font-size: 20px;
+  text-align: center;
+  justify-self: center;
+  margin: 20px 0 20px 0;
+}
+
+.container table td,
+.container table th {
+  border: 1px solid #581212;
+  padding: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.squares {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin: 40px 0 40px 0;
+}
+
+.row .square + .square {
+  background-color: coral;
+}
+
+.row + .row .square {
+  background-color: lightgreen;
+}
+
+.row + .row .square + .square {
+  background-color: lightpink;
+}
+
+.row + .row .square + .square + .square {
+  background-color: lightsalmon;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
+
+ol {
+  display: flex;
+  justify-content: space-around;
+}
+
+li {
+  font-size: 24px;
+  color: #581212;
+}
+
+li a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+li + li {
+  color: #357c19;
+}
+
+li + li + li {
+  color: #273c70;
 }
