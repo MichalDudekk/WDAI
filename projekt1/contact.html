@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quarter Pounder</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+                <li class="nav-item"><a href="gallery.html">Gallery</a></li>
+            </ul>
+        </nav>
+        <main class="main-container">
+            <div class="main-content">
+                <div class="search">
+                    <h1>Contact <span>US</span></h1>
+                </div>
+            </div>
+            <div class="main-content">
+                <form class="contact-form">
+                    <input type="text" name="email" placeholder="email" />
+                    <select name="topic">
+                        <option value="question">Question</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea name="content" placeholder="message"></textarea>
+                    <input type="submit" value="Send" />
+                </form>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; Michał Dudek</p>
+            </div>
+        </footer>
+    </body>
+</html>
