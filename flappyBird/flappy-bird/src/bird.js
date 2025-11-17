@@ -1,43 +1,80 @@
 class Bird {
     constructor() {
-        this.x = 50; // Starting x position
-        this.y = 150; // Starting y position
-        this.width = 34; // Width of the bird sprite
-        this.height = 24; // Height of the bird sprite
-        this.gravity = 0.4; // Gravity effect
-        this.lift = -7; // Lift effect when jumping
-        this.velocity = 0; // Initial velocity
-        this.velocityY = 0; // Initial velocity Y
-        this.image = new Image(); // Bird image
-        this.image.src = "assets/Flappy Bird/yellowbird-downflap.png"; // Path to bird sprite
+        this.x = 50;
+        this.y = 150;
+        this.width = 34;
+        this.height = 24;
+
+        this.gravity = 0.4;
+        this.lift = -7;
+        this.velocity = 0;
+
+        // animacja - trzy klatki
+        this.frames = [];
+        const base = "assets/Flappy Bird/";
+        const names = [
+            "yellowbird-downflap.png",
+            "yellowbird-midflap.png",
+            "yellowbird-upflap.png",
+        ];
+        names.forEach((n) => {
+            const img = new Image();
+            img.src = base + n;
+            this.frames.push(img);
+        });
+
+        this.frameIndex = 0;
+        this.animTick = 0;
+        this.animSpeed = 5; // zmień, aby przyspieszyć/zwolnić animację
     }
 
     update() {
-        this.velocity += this.gravity; // Apply gravity
-        this.y += this.velocity; // Update y position
+        // animacja skrzydeł
+        this.animTick++;
+        if (this.animTick >= this.animSpeed) {
+            this.animTick = 0;
+            this.frameIndex = (this.frameIndex + 1) % this.frames.length;
+        }
 
-        // Prevent the bird from falling off the canvas
+        // fizyka
+        this.velocity += this.gravity;
+        this.y += this.velocity;
+
+        // ograniczenia górny/lewy dolny
         if (this.y + this.height >= canvas.height) {
             this.y = canvas.height - this.height;
-            this.velocity = 0; // Reset velocity
+            this.velocity = 0;
         }
-
-        // Prevent the bird from flying off the top of the canvas
         if (this.y < 0) {
             this.y = 0;
-            this.velocity = 0; // Reset velocity
+            this.velocity = 0;
         }
-    }
-
-    jump() {
-        this.velocity += this.lift; // Apply lift
     }
 
     flap() {
-        this.velocity = this.lift; // Użyj lift zamiast velocityY
+        this.velocity = this.lift;
     }
 
+    // rysowanie z rotacją zależną od prędkości
     draw(ctx) {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height); // Draw the bird
+        const img = this.frames[this.frameIndex];
+        const cx = this.x + this.width / 2;
+        const cy = this.y + this.height / 2;
+
+        // kąt pochylania (skaluj i ogranicz)
+        let angle = this.velocity * 0.06;
+        angle = Math.max(-0.8, Math.min(1.0, angle));
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        ctx.drawImage(
+            img,
+            -this.width / 2,
+            -this.height / 2,
+            this.width,
+            this.height
+        );
+        ctx.restore();
     }
 }

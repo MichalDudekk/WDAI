@@ -18,6 +18,12 @@ let frameCount = 0;
 let backgroundImage = new Image();
 backgroundImage.src = "assets/Flappy Bird/background-day.png";
 
+// dodane: base (ziemia) i wysokość (dopasuj BASE_HEIGHT jeśli potrzeba)
+const baseImage = new Image();
+baseImage.src = "assets/Flappy Bird/base.png";
+const BASE_HEIGHT = 112; // typowa wysokość "base" w pikselach; zmień jeśli używasz innego obrazu
+const BASE_OFFSET = 40; // przesunięcie "base" w dół (większa wartość = bardziej w dół)
+
 function startGame() {
     bird = new Bird();
     pipes = [];
@@ -41,12 +47,13 @@ function gameLoop() {
 function update() {
     bird.update();
 
-    console.log(`${bird.y} + ${bird.height} >= ${canvas.height}`);
-
-    if (bird.y + bird.height >= canvas.height) {
-        console.log("aaa");
+    // kolizja z "base" (ziemią) - używamy wysokości base i offsetu
+    const baseTopY = canvas.height - BASE_HEIGHT + BASE_OFFSET;
+    if (bird.y + bird.height >= baseTopY) {
+        // ustaw ptaka dokładnie na ziemi (opcjonalne), odtwórz dźwięk i zakończ grę
+        bird.y = baseTopY - bird.height;
         gameOver = true;
-        dieSound.play();
+        if (typeof dieSound !== "undefined") dieSound.play();
     }
 
     if (frameCount % 100 === 0) {
@@ -74,14 +81,46 @@ function draw() {
 
     bird.draw(ctx);
     pipes.forEach((pipe) => pipe.draw(ctx));
-    drawScore();
+
+    // rysuj ziemię (base) na dole z offsetem
+    ctx.drawImage(
+        baseImage,
+        0,
+        canvas.height - BASE_HEIGHT + BASE_OFFSET,
+        canvas.width,
+        BASE_HEIGHT
+    );
+
+    // rysuj wynik obrazkami
+    if (typeof drawScoreSprites === "function") {
+        drawScoreSprites(score, ctx, canvas, {
+            padding: 12,
+            digitHeight: 36,
+            spacing: 4,
+        });
+    } else {
+        // debug: funkcja niedostępna
+        // console.warn("drawScoreSprites is not defined");
+    }
 }
 
-function drawScore() {
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText(`Score: ${score}`, 10, 20);
-}
+// function drawScoreSprites(score, ctx, canvas, options) {
+//     const { padding, digitHeight, spacing } = options;
+//     const fontSize = digitHeight;
+//     const lineHeight = digitHeight + spacing;
+//     const x = padding;
+//     const y = canvas.height - BASE_HEIGHT - lineHeight;
+
+//     ctx.font = `${fontSize}px Arial`;
+//     ctx.fillStyle = "black";
+
+//     const digits = score.toString().split("").reverse();
+//     for (let i = 0; i < digits.length; i++) {
+//         const digit = digits[i];
+//         const x = padding + i * (digitHeight + spacing);
+//         ctx.fillText(digit, x, y);
+//     }
+// }
 
 function endGame() {
     ctx.fillStyle = "red";
