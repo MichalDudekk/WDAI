@@ -1,0 +1,16 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "A simple Flappy Bird clone using HTML5 canvas.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "live-server .",
+    "build": "echo 'Build step not defined yet.'"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
