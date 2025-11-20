@@ -25,12 +25,17 @@ baseImage.src = "assets/Flappy Bird/base.png";
 const BASE_HEIGHT = 112; // typowa wysokość "base" w pikselach; zmień jeśli używasz innego obrazu
 const BASE_OFFSET = 40; // przesunięcie "base" w dół (większa wartość = bardziej w dół)
 
+let birdCrashed = false; // nowa flaga: ptak uderzył w rurę
+let crashFrames = 0; // licznik klatek dla animacji spadania
+
 function startGame() {
     bird = new Bird();
     pipes = [];
     score = 0;
     gameOver = false;
-    gameOverTriggered = false; // zresetuj flagę
+    gameOverTriggered = false;
+    birdCrashed = false; // zresetuj
+    crashFrames = 0; // zresetuj
     frameCount = 0;
     requestAnimationFrame(gameLoop);
 }
@@ -53,34 +58,56 @@ function gameLoop() {
 }
 
 function update() {
-    bird.update();
+    // jeśli ptak się nie rozbił — normalna aktualizacja
+    if (!birdCrashed) {
+        bird.update();
+    }
 
-    // kolizja z "base" (ziemią) - używamy wysokości base i offsetu
+    // kolizja z "base" (ziemią)
     const baseTopY = canvas.height - BASE_HEIGHT + BASE_OFFSET;
-    if (bird.y + bird.height >= baseTopY) {
-        // ustaw ptaka dokładnie na ziemi (opcjonalne), odtwórz dźwięk i zakończ grę
+    if (bird.y + bird.height >= baseTopY && !birdCrashed) {
         bird.y = baseTopY - bird.height;
         gameOver = true;
+        birdCrashed = true;
         if (typeof dieSound !== "undefined") dieSound.play();
     }
 
-    if (frameCount % 100 === 0) {
+    // generuj nowe rury TYLKO jeśli ptak się nie rozbił
+    if (frameCount % 100 === 0 && !birdCrashed) {
         const randomHeight =
             Math.floor(Math.random() * (canvas.height - 150 - 20)) + 20;
         pipes.push(new Pipe(canvas.width, randomHeight));
     }
 
-    pipes.forEach((pipe) => {
-        pipe.update();
-        if (pipe.offscreen()) {
-            pipes.splice(pipes.indexOf(pipe), 1);
-            score++;
-        }
-        if (pipe.collides(bird)) {
+    // aktualizuj ruchy rur TYLKO jeśli ptak się nie rozbił
+    if (!birdCrashed) {
+        pipes.forEach((pipe) => {
+            pipe.update();
+            if (pipe.offscreen()) {
+                pipes.splice(pipes.indexOf(pipe), 1);
+                score++;
+            }
+            if (pipe.collides(bird) && !birdCrashed) {
+                // ptak uderzył w rurę — zacznij animację spadania
+                birdCrashed = true;
+                crashFrames = 0;
+                if (typeof dieSound !== "undefined") dieSound.play();
+            }
+        });
+    }
+
+    // animacja spadania po uderzeniu w rurę
+    if (birdCrashed && !gameOver) {
+        crashFrames++;
+        bird.velocity += 0.5; // przyspieszenie spadania
+        bird.y += bird.velocity;
+
+        // po 30 klatkach lub gdy ptak dotknie ziemi — koniec gry
+        if (crashFrames > 30 || bird.y + bird.height >= baseTopY) {
+            bird.y = baseTopY - bird.height;
             gameOver = true;
-            if (typeof dieSound !== "undefined") dieSound.play();
         }
-    });
+    }
 }
 
 function draw() {
@@ -111,24 +138,6 @@ function draw() {
         // console.warn("drawScoreSprites is not defined");
     }
 }
-
-// function drawScoreSprites(score, ctx, canvas, options) {
-//     const { padding, digitHeight, spacing } = options;
-//     const fontSize = digitHeight;
-//     const lineHeight = digitHeight + spacing;
-//     const x = padding;
-//     const y = canvas.height - BASE_HEIGHT - lineHeight;
-
-//     ctx.font = `${fontSize}px Arial`;
-//     ctx.fillStyle = "black";
-
-//     const digits = score.toString().split("").reverse();
-//     for (let i = 0; i < digits.length; i++) {
-//         const digit = digits[i];
-//         const x = padding + i * (digitHeight + spacing);
-//         ctx.fillText(digit, x, y);
-//     }
-// }
 
 function endGame() {
     if (typeof drawGameOver === "function") {
