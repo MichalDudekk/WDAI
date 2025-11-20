@@ -41,6 +41,26 @@ function startGame() {
 }
 
 function gameLoop() {
+    // jeśli gra się nie zaczęła — rysuj ekran startowy
+    if (!isGameStarted()) {
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+        bird.draw(ctx);
+        ctx.drawImage(
+            baseImage,
+            0,
+            canvas.height - BASE_HEIGHT + BASE_OFFSET,
+            canvas.width,
+            BASE_HEIGHT
+        );
+        console.log("Drawing1");
+        if (typeof drawStartScreen === "function") {
+            console.log("Drawing start screen");
+            drawStartScreen(ctx, canvas);
+        }
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+
     if (gameOver && !gameOverTriggered) {
         gameOverTriggered = true;
         endGame();
@@ -69,7 +89,7 @@ function update() {
         bird.y = baseTopY - bird.height;
         gameOver = true;
         birdCrashed = true;
-        if (typeof dieSound !== "undefined") dieSound.play();
+        if (typeof Sounds !== "undefined") Sounds.die();
     }
 
     // generuj nowe rury TYLKO jeśli ptak się nie rozbił
@@ -86,12 +106,12 @@ function update() {
             if (pipe.offscreen()) {
                 pipes.splice(pipes.indexOf(pipe), 1);
                 score++;
+                if (typeof Sounds !== "undefined") Sounds.score(); // dźwięk punktu
             }
             if (pipe.collides(bird) && !birdCrashed) {
-                // ptak uderzył w rurę — zacznij animację spadania
                 birdCrashed = true;
                 crashFrames = 0;
-                if (typeof dieSound !== "undefined") dieSound.play();
+                if (typeof Sounds !== "undefined") Sounds.hit();
             }
         });
     }
@@ -158,8 +178,12 @@ function endGame() {
 
 document.addEventListener("keydown", (event) => {
     if (event.code === "Space" && !gameOver) {
+        if (!isGameStarted()) setGameStarted(true);
         bird.flap();
+        if (typeof Sounds !== "undefined") Sounds.flap(); // dźwięk machania skrzydłami
     }
 });
 
+// start gry — włącz BGM
 startGame();
+if (typeof Sounds !== "undefined") Sounds.startBGM();
