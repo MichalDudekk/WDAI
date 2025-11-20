@@ -45,15 +45,24 @@ class Pipe {
     }
 
     collides(bird) {
-        // Check for collision with the bird
-        if (bird.x + bird.width > this.x && bird.x < this.x + this.width) {
-            if (
-                bird.y < this.height ||
-                bird.y + bird.height > this.height + this.gap
-            ) {
-                return true; // Collision detected
-            }
+        // Sprawdzenie kolizji z górną rurą
+        if (
+            bird.x + bird.width > this.x &&
+            bird.x < this.x + this.width &&
+            bird.y < this.height
+        ) {
+            return true;
         }
+
+        // Sprawdzenie kolizji z dolną rurą
+        if (
+            bird.x + bird.width > this.x &&
+            bird.x < this.x + this.width &&
+            bird.y + bird.height > this.height + this.gap
+        ) {
+            return true;
+        }
+
         return false; // No collision
     }
 

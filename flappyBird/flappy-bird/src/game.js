@@ -15,6 +15,7 @@ let pipes = [];
 let score = 0;
 let gameOver = false;
 let frameCount = 0;
+let gameOverTriggered = false; // flaga, aby endGame() wywoływał się tylko raz
 let backgroundImage = new Image();
 backgroundImage.src = "assets/Flappy Bird/background-day.png";
 
@@ -29,13 +30,20 @@ function startGame() {
     pipes = [];
     score = 0;
     gameOver = false;
+    gameOverTriggered = false; // zresetuj flagę
     frameCount = 0;
     requestAnimationFrame(gameLoop);
 }
 
 function gameLoop() {
-    if (gameOver) {
+    if (gameOver && !gameOverTriggered) {
+        gameOverTriggered = true;
+        endGame();
         return;
+    }
+
+    if (gameOverTriggered) {
+        return; // czekaj na klik przycisku "Zagraj ponownie"
     }
 
     frameCount++;
@@ -70,7 +78,7 @@ function update() {
         }
         if (pipe.collides(bird)) {
             gameOver = true;
-            dieSound.play();
+            if (typeof dieSound !== "undefined") dieSound.play();
         }
     });
 }
@@ -123,9 +131,20 @@ function draw() {
 // }
 
 function endGame() {
-    ctx.fillStyle = "red";
-    ctx.font = "40px Arial";
-    ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+    if (typeof drawGameOver === "function") {
+        drawGameOver(score, ctx, canvas, () => {
+            // callback: Zagraj ponownie
+            startGame();
+        });
+    } else {
+        // fallback jeśli gameOver.js nie załadowany
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.font = "40px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+    }
 }
 
 document.addEventListener("keydown", (event) => {
