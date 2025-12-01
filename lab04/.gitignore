@@ -1,0 +1,9 @@
+/books/node_modules
+/books/database.sqlite
+/books/.env
+collection.http
+
+
+
+
+/myenv
