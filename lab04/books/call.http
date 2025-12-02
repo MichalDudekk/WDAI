@@ -9,6 +9,8 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
+    "email": "12345",
+
     "title": "Nowa ksiazka",
     "author": "Jan Kowalski",
     "year": 2023

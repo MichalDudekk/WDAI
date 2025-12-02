@@ -1,6 +1,6 @@
 import express from "express";
 import Book from "../models/book.js";
-import e from "express";
+import authenticateToken from "../middelware/auth.js";
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.get("/:bookId", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateToken, async (req, res) => {
     try {
         const { title, author, year } = req.body;
         const newBook = await Book.create({ title, author, year });
