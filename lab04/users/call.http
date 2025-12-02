@@ -12,7 +12,7 @@ Content-Type: application/json
 ### Zaloguj sie jako istniejacy uzytkownik
 POST http://localhost:3002/api/login
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTc2NDYzNDYzMywiZXhwIjoxNzY0NjM4MjMzfQ.Moi4Lq8TytxAf0vKKZbO1OQjFR3cuYgtGMs6pmX8Wus
+#authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTc2NDYzNDYzMywiZXhwIjoxNzY0NjM4MjMzfQ.Moi4Lq8TytxAf0vKKZbO1OQjFR3cuYgtGMs6pmX8Wus
 
 {
     "email": "gmail@gmail.com",

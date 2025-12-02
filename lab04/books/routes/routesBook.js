@@ -1,6 +1,6 @@
 import express from "express";
 import Book from "../models/book.js";
-import authenticateToken from "../middelware/auth.js";
+import authenticateCookie from "../middelware/authCookie.js";
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.get("/:bookId", async (req, res) => {
     }
 });
 
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", authenticateCookie, async (req, res) => {
     try {
         const { title, author, year } = req.body;
         const newBook = await Book.create({ title, author, year });
@@ -35,7 +35,7 @@ router.post("/", authenticateToken, async (req, res) => {
     }
 });
 
-router.delete("/:bookId", async (req, res) => {
+router.delete("/:bookId", authenticateCookie, async (req, res) => {
     try {
         const deletedRowsCount = await Book.destroy({
             where: {

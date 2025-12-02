@@ -8,7 +8,10 @@ const port = 3000;
 import database from "./database.js";
 import routesBooks from "./routes/routesBook.js";
 
+import cookieParser from "cookie-parser"; // npm install cookie-parser
+
 app.use(express.json()); // Middleware do parsowania JSON
+app.use(cookieParser());
 app.use("/api/books", routesBooks);
 
 // 2. Połączenie z bazą
