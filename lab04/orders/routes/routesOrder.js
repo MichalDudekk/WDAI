@@ -23,27 +23,41 @@ router.patch("/:orderId", authenticateCookie, async (req, res) => {
         }
 
         const updates = req.body;
-        await Book.update(updates, {
+        await Order.update(updates, {
             where: {
-                id: req.params.bookId,
+                id: req.params.orderId,
             },
         });
 
-        res.status(200).json(orders);
+        res.status(200).json({ message: "Order updated successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// router.post("/", authenticateCookie, async (req, res) => {
-//     try {
-//         const { title, author, year } = req.body;
-//         const newOrder = await Order.create({ title, author, year });
-//         res.status(201).json(newOrder.id);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// });
+router.post("/", authenticateCookie, async (req, res) => {
+    try {
+        const { userId, bookId, quantity } = req.body;
+
+        const response = await fetch(
+            `http://localhost:3000/api/books/${bookId}`
+        );
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return res
+                    .status(400)
+                    .json({ error: "Book with given Id does not exist" });
+            }
+            throw new Error(`Book service error: Status ${response.status}`);
+        }
+
+        const newOrder = await Order.create({ userId, bookId, quantity });
+        res.status(201).json(newOrder.id);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 router.delete("/:orderId", authenticateCookie, async (req, res) => {
     try {

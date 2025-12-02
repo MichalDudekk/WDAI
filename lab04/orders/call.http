@@ -1,20 +1,20 @@
 
-### Pobierz orders po id użytkownika
+### Pobierz zamówienia po id użytkownika
 GET http://localhost:3003/api/orders/6
 
-### Dodaj nowa ksiazke
-POST http://localhost:3003/api/books
+### Dodaj nowe zamówienie
+POST http://localhost:3003/api/orders/
 Content-Type: application/json
 
 {
     "email": "gmail@gmail.com",
 
-    "title": "Nowa ksiazka",
-    "author": "Jan Kowalski",
-    "year": 2023
+    "userId": 1,
+    "bookId": 7,
+    "quantity": 1
 }
 
-### Usun order po id
+### Usun zamówienie po id zamówienia
 DELETE http://localhost:3003/api/orders/1
 Content-Type: application/json
 
@@ -22,11 +22,11 @@ Content-Type: application/json
     "email": "gmail@gmail.com"
 }
 
-### Zaktualizuj zamówienie
-PATCH http://localhost:3003/api/orders/1
+### Zaktualizuj zamówienie o podanym id zamówienia
+PATCH http://localhost:3003/api/orders/2
 Content-Type: application/json
 
 {
     "email": "gmail@gmail.com",
-    "quantity": 10
+    "quantity": 5
 }

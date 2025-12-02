@@ -16,7 +16,7 @@ app.use("/api/orders", routesOrders);
 
 // 2. Połączenie z bazą
 database
-    .sync() // Zapewnia, że tabele istnieją (alternatywa dla db:migrate)
+    .sync() // Zapewnia, że tabele istnieją
     .then(() => {
         app.listen(port, () => {
             console.log(`Serwer działa na http://localhost:${port}`);

@@ -2,7 +2,6 @@ import express from "express";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import generateJWT from "../middelware/generateJWT.js";
-import authenticateToken from "../middelware/auth.js";
 
 const router = express.Router();
 
@@ -18,7 +17,7 @@ router.post("/login", async (req, res) => {
         res.cookie(`auth_token`, token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Użyj Secure tylko w produkcji
-            maxAge: 3600000, // Czas życia w milisekundach (1 godzina)
+            maxAge: 3600000, // 1 hour
             // sameSite: "strict",
             sameSite: "Lax",
         });
