@@ -7,7 +7,6 @@ GET http://localhost:3000/api/books/1
 ### Dodaj nowa ksiazke
 POST http://localhost:3000/api/books
 Content-Type: application/json
-#authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTc2NDYzNDYzMywiZXhwIjoxNzY0NjM4MjMzfQ.Moi4Lq8TytxAf0vKKZbO1OQjFR3cuYgtGMs6pmX8Wus
 
 {
     "email": "gmail@gmail.com",
