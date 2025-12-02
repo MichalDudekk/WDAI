@@ -1,6 +1,8 @@
 import express from "express";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import generateJWT from "../middelware/generateJWT.js";
+import authenticateToken from "../middelware/auth.js";
 
 const router = express.Router();
 
@@ -11,9 +13,21 @@ router.post("/login", async (req, res) => {
         if (user === null) throw new Error("DEV: User not found");
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) throw new Error("DEV: Invalid password");
+
+        const token = generateJWT(user.email);
+        res.cookie(`auth_token`, token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Użyj Secure tylko w produkcji
+            maxAge: 3600000, // Czas życia w milisekundach (1 godzina)
+            // sameSite: "strict",
+            sameSite: "Lax",
+        });
+
+        // console.log("Generated token:", token);
         res.status(200).json({ id: user.id, email: user.email });
-        return;
+        return token;
     } catch (error) {
+        console.log(error.message);
         res.status(500).json({ error: "Logowanie nie powiodło się" });
         // res.status(500).json({ error: error.message });
         return;

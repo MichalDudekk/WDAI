@@ -4,15 +4,17 @@ POST http://localhost:3002/api/register
 Content-Type: application/json
 
 {
-    "email": "user@gmail.com",
-    "password": "QWERTY12345"
+    "email": "gmail@gmail.com",
+    "password": "1234"
 }
 
+# testowy token wygenerowany dla uzytkownika powyzej
 ### Zaloguj sie jako istniejacy uzytkownik
 POST http://localhost:3002/api/login
 Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTc2NDYzNDYzMywiZXhwIjoxNzY0NjM4MjMzfQ.Moi4Lq8TytxAf0vKKZbO1OQjFR3cuYgtGMs6pmX8Wus
 
 {
-    "email": "user@gmail.com",
-    "password": "QWERTY12345"
+    "email": "gmail@gmail.com",
+    "password": "1234"
 }

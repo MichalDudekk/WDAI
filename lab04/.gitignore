@@ -1,9 +1,14 @@
 /books/node_modules
 /books/database.sqlite
 /books/.env
-collection.http
 
+/users/node_modules
+/users/database.sqlite
+/users/.env
 
-
+/orders/node_modules
+/orders/database.sqlite
+/orders/.env
 
 /myenv
+collection.http

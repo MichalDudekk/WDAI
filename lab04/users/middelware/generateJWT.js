@@ -14,14 +14,6 @@ const generateJWT = (userEmail) => {
         algorithm: "HS256",
     });
 
-    // res.cookie(`auth_token_${userEmail}`, token, {
-    //     httpOnly: true,
-    //     secure: process.env.NODE_ENV === "production", // Użyj Secure tylko w produkcji
-    //     maxAge: 3600000, // Czas życia w milisekundach (1 godzina)
-    //     // sameSite: "strict",
-    //     sameSite: "Lax",
-    // });
-
     return token;
 };
 
