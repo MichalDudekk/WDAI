@@ -7,19 +7,19 @@ POST http://localhost:3003/api/orders/
 Content-Type: application/json
 
 {
-    "email": "gasdasdas@gmail.com",
+    "email": "new1@gmail.com",
 
     "userId": 1,
-    "bookId": 10,
+    "bookId": 14,
     "quantity": 1
 }
 
 ### Usun zamówienie po id zamówienia
-DELETE http://localhost:3003/api/orders/1
+DELETE http://localhost:3003/api/orders/10
 Content-Type: application/json
 
 {
-    "email": "gmail@gmail.com"
+    "email": "new1@gmail.com"
 }
 
 ### Zaktualizuj zamówienie o podanym id zamówienia

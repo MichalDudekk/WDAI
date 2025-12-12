@@ -9,17 +9,17 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "email": "new@gmail.com",
+    "email": "new1@gmail.com",
 
-    "title": "Nowa ksiazkaqq",
+    "title": "Nowa ksiazka1",
     "author": "Jan Kowalski",
     "year": 2023
 }
 
 ### Delete book by id
-DELETE http://localhost:3000/api/books/7
+DELETE http://localhost:3000/api/books/13
 Content-Type: application/json
 
 {
-    "email": "gmail@gmail.com"
+    "email": "new1@gmail.com"
 }

@@ -4,7 +4,7 @@ POST http://localhost:3002/api/register
 Content-Type: application/json
 
 {
-    "email": "new@gmail.com",
+    "email": "new1@gmail.com",
     "password": "1234"
 }
 
@@ -14,6 +14,6 @@ POST http://localhost:3002/api/login
 Content-Type: application/json
 
 {
-    "email": "new@gmail.com",
+    "email": "new1@gmail.com",
     "password": "1234"
 }

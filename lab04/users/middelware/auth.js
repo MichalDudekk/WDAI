@@ -1,6 +1,7 @@
+// NIE UŻYWANE AKTUALNIE
 import jwt from "jsonwebtoken";
 
-const SECRET_KEY = "super-tajny-klucz-nigdy-nie-udostepniaj";
+const SECRET_KEY = process.env.JWT_SECRET;
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
