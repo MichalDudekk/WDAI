@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 
-// 1. Zdefiniuj swoje tajne dane (klucz)
-// W PRAWDZIWEJ APLIKACJI KLUCZ POWINIEN BYĆ POBRANY ZE ZMIENNEJ ŚRODOWISKOWEJ!
-const SECRET_KEY = "super-tajny-klucz-nigdy-nie-udostepniaj";
+const SECRET_KEY = process.env.JWT_SECRET;
 
 const generateJWT = (userEmail) => {
     const payload = {

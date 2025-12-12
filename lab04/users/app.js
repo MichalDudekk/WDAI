@@ -1,4 +1,7 @@
 // app.js
+
+import "dotenv/config";
+
 import express from "express";
 
 // 1. Inicjalizacja Express

@@ -9,9 +9,9 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "email": "gmail@gmail.com",
+    "email": "new@gmail.com",
 
-    "title": "Nowa ksiazka",
+    "title": "Nowa ksiazkaqq",
     "author": "Jan Kowalski",
     "year": 2023
 }

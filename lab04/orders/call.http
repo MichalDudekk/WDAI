@@ -7,10 +7,10 @@ POST http://localhost:3003/api/orders/
 Content-Type: application/json
 
 {
-    "email": "gmail@gmail.com",
+    "email": "gasdasdas@gmail.com",
 
     "userId": 1,
-    "bookId": 7,
+    "bookId": 10,
     "quantity": 1
 }
 
