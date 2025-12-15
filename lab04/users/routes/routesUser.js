@@ -16,10 +16,10 @@ router.post("/login", async (req, res) => {
         const token = generateJWT(user.email);
         res.cookie(`auth_token`, token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Użyj Secure tylko w produkcji
+            secure: process.env.NODE_ENV === "production", // Secure tylko w produkcji
             maxAge: 3600000, // 1 hour
-            // sameSite: "strict",
-            sameSite: "Lax",
+            sameSite: "strict",
+            // sameSite: "Lax",
         });
 
         // console.log("Generated token:", token);
@@ -27,8 +27,7 @@ router.post("/login", async (req, res) => {
         return token;
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ error: "Logowanie nie powiodło się" });
-        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to login" });
         return;
     }
 });
@@ -52,7 +51,7 @@ router.post("/register", async (req, res) => {
             return newUser.id;
         }
     } catch (error) {
-        res.status(500).json({ error: "Rejestracja nie powiodła się" });
+        res.status(500).json({ error: "Failed to register" });
         return -1;
     }
 });

@@ -10,19 +10,18 @@ const authenticateCookie = (req, res, next) => {
     }
 
     try {
-        // console.log(1);
+        // Sprawdzenie czy token pasuje do emaila z body zapytania
         const decoded = jwt.verify(cookie, SECRET_KEY);
-        // console.log(2);
         req.user = decoded;
         if (req.user.email != req.body.email) {
-            console.log("DEV: Email in token:", req.user.email);
+            // console.log("DEV: Email in token:", req.user.email);
             throw new Error("DEV: Email in token does not match email in body");
         }
 
         // Przekazanie żądania dalej
         next();
     } catch (error) {
-        // Błędy weryfikacji (expired, invalid signature, etc.)
+        // Błędy weryfikacji
         return res.status(403).json({ error: "Access denied" });
     }
 };

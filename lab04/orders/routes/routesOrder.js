@@ -11,7 +11,8 @@ router.get("/:userId", async (req, res) => {
         });
         res.status(200).json(orders);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to fetch orders" });
     }
 });
 
@@ -31,7 +32,8 @@ router.patch("/:orderId", authenticateCookie, async (req, res) => {
 
         res.status(200).json({ message: "Order updated successfully" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to update order" });
     }
 });
 
@@ -55,7 +57,8 @@ router.post("/", authenticateCookie, async (req, res) => {
         const newOrder = await Order.create({ userId, bookId, quantity });
         res.status(201).json(newOrder.id);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to create order" });
     }
 });
 
@@ -71,7 +74,8 @@ router.delete("/:orderId", authenticateCookie, async (req, res) => {
         }
         res.status(200).json({ message: "Order deleted successfully" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to delete order" });
     }
 });
 

@@ -2,14 +2,14 @@
 GET http://localhost:3000/api/books
 
 ### Get book by id
-GET http://localhost:3000/api/books/10
+GET http://localhost:3000/api/books/15
 
 ### Add new book
 POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "email": "new1@gmail.com",
+    "email": "new3@gmail.com",
 
     "title": "Nowa ksiazka1",
     "author": "Jan Kowalski",
@@ -17,9 +17,9 @@ Content-Type: application/json
 }
 
 ### Delete book by id
-DELETE http://localhost:3000/api/books/13
+DELETE http://localhost:3000/api/books/18
 Content-Type: application/json
 
 {
-    "email": "new1@gmail.com"
+    "email": "new3@gmail.com"
 }

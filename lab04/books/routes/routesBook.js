@@ -9,11 +9,10 @@ router.get("/", async (req, res) => {
         const books = await Book.findAll();
         res.status(200).json(books);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to fetch books" });
     }
 });
 
-// część frameworka - wszystko po : staje się zmienną
 router.get("/:bookId", async (req, res) => {
     try {
         const book = await Book.findByPk(req.params.bookId);
@@ -21,7 +20,7 @@ router.get("/:bookId", async (req, res) => {
             ? res.status(200).json(book)
             : res.status(404).json({ error: "Book not found" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to fetch book" });
     }
 });
 
@@ -31,7 +30,7 @@ router.post("/", authenticateCookie, async (req, res) => {
         const newBook = await Book.create({ title, author, year });
         res.status(201).json(newBook.id);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to create book" });
     }
 });
 
@@ -47,7 +46,7 @@ router.delete("/:bookId", authenticateCookie, async (req, res) => {
         }
         res.status(200).json({ message: "Book deleted successfully" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Failed to delete book" });
     }
 });
 

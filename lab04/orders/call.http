@@ -1,21 +1,21 @@
 
 ### Pobierz zamówienia po id użytkownika
-GET http://localhost:3003/api/orders/6
+GET http://localhost:3003/api/orders/1
 
 ### Dodaj nowe zamówienie
 POST http://localhost:3003/api/orders/
 Content-Type: application/json
 
 {
-    "email": "new1@gmail.com",
+    "email": "new3@gmail.com",
 
-    "userId": 1,
-    "bookId": 14,
+    "userId": 12,
+    "bookId": 19,
     "quantity": 1
 }
 
 ### Usun zamówienie po id zamówienia
-DELETE http://localhost:3003/api/orders/10
+DELETE http://localhost:3003/api/orders/12
 Content-Type: application/json
 
 {
@@ -23,10 +23,10 @@ Content-Type: application/json
 }
 
 ### Zaktualizuj zamówienie o podanym id zamówienia
-PATCH http://localhost:3003/api/orders/2
+PATCH http://localhost:3003/api/orders/14
 Content-Type: application/json
 
 {
-    "email": "gmail@gmail.com",
+    "email": "new3@gmail.com",
     "quantity": 5
 }

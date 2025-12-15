@@ -4,7 +4,6 @@ import "dotenv/config";
 
 import express from "express";
 
-// 1. Inicjalizacja Express
 const app = express();
 const port = 3000;
 
@@ -17,14 +16,14 @@ app.use(express.json()); // Middleware do parsowania JSON
 app.use(cookieParser());
 app.use("/api/books", routesBooks);
 
-// 2. Połączenie z bazą
 database
     .sync() // Zapewnia, że tabele istnieją (alternatywa dla db:migrate)
     .then(() => {
         app.listen(port, () => {
-            console.log(`Serwer działa na http://localhost:${port}`);
+            console.log(`The server is running on http://localhost:${port}`);
         });
     })
     .catch((err) => {
-        console.error("Nie udało się połączyć z bazą danych:", err);
+        // console.error("Failed to connect to database:", err);
+        console.error("Failed to connect to database");
     });
