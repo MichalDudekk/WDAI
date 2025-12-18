@@ -13,6 +13,9 @@ import "./App.css";
 // import Ternary from "./components/inne/Ternary";
 // import Aktualizacja from "./components/inne/Aktualizacja";
 
+// import Studenci from "./components/studenci/Studenci";
+import StudentManager from "./components/studenci/StudentManager";
+
 function App() {
     return (
         <>
@@ -26,6 +29,9 @@ function App() {
 
             {/* <Ternary /> */}
             {/* <Aktualizacja /> */}
+
+            {/* <Studenci /> */}
+            <StudentManager />
         </>
     );
 }
