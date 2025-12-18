@@ -14,7 +14,14 @@ import "./App.css";
 // import Aktualizacja from "./components/inne/Aktualizacja";
 
 // import Studenci from "./components/studenci/Studenci";
-import StudentManager from "./components/studenci/StudentManager";
+// import StudentManager from "./components/studenci/StudentManager";
+
+// import Licznik from "./components/efekty/Licznik";
+// import Tytul from "./components/efekty/Tytul";
+// import Odliczanie from "./components/efekty/Odliczanie";
+
+import Komentarz from "./components/produkty/Komentarz";
+import Komentarze from "./components/produkty/Komentarze";
 
 function App() {
     return (
@@ -31,7 +38,20 @@ function App() {
             {/* <Aktualizacja /> */}
 
             {/* <Studenci /> */}
-            <StudentManager />
+            {/* <StudentManager /> */}
+
+            {/* <Licznik /> */}
+            {/* <Tytul /> */}
+            {/* <Odliczanie /> */}
+
+            {/* <Komentarz
+                id={0}
+                postId={0}
+                likes={5}
+                user={{ id: 0, username: "gosc", fullName: "Dariusz Polak" }}
+                body={"Słaby film xd"}
+            /> */}
+            <Komentarze />
         </>
     );
 }
