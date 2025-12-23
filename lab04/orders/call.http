@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Usun zamówienie po id zamówienia
-DELETE http://localhost:3003/api/orders/17
+DELETE http://localhost:3003/api/orders/1
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Zaktualizuj zamówienie o podanym id zamówienia
-PATCH http://localhost:3003/api/orders/14
+PATCH http://localhost:3003/api/orders/2
 Content-Type: application/json
 
 {

@@ -11,4 +11,4 @@
 /orders/.env
 
 /myenv
-collection.http
+.env
