@@ -1,0 +1,25 @@
+### Get all books
+GET http://localhost:3000/api/books
+
+### Get book by id
+GET http://localhost:3000/api/books/1
+
+### Add new book
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+    "email": "new3@gmail.com",
+
+    "title": "Nowa ksiazka1",
+    "author": "Jan Kowalski",
+    "year": 2023
+}
+
+### Delete book by id
+DELETE http://localhost:3000/api/books/2
+Content-Type: application/json
+
+{
+    "email": "new3@gmail.com"
+}

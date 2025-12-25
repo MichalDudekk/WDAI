@@ -1,0 +1,28 @@
+name: microservices
+
+services:
+    users-service:
+        build: ./users
+        container_name: users
+        env_file: ./users/.env
+        ports:
+            - "3002:3002" # to change port you have to change it also in ./users/.env
+
+    books-service:
+        build: ./books
+        container_name: books
+        env_file: ./books/.env
+        ports:
+            - "3000:3000" # you have to set the same port in ./orders/.env as BOOKS_PORT
+        depends_on:
+            - users-service
+
+    orders-service:
+        build: ./orders
+        container_name: orders
+        env_file: ./orders/.env
+        ports:
+            - "3003:3003"
+        depends_on:
+            - users-service
+            - books-service # remember to set BOOKS_PORT in ./orders/.env to the same port as in books-service
