@@ -41,10 +41,11 @@ router.post("/", authenticateCookie, async (req, res) => {
     try {
         const { userId, bookId, quantity } = req.body;
 
+        const booksPort = process.env.BOOKS_PORT || 3000;
         const response = await fetch(
             // `http://localhost:3000/api/books/${bookId}` // poza dockerem
             // `http://host.docker.internal:3000/api/books/${bookId}` // do testów w dockerze
-            `http://books-service:3000/api/books/${bookId}` // wersja z docker-compose.yaml
+            `http://books-service:${booksPort}/api/books/${bookId}` // wersja z docker-compose.yaml
         );
 
         if (!response.ok) {

@@ -5,7 +5,7 @@ import "dotenv/config";
 import express from "express";
 
 const app = express();
-const port = 3002;
+const port = process.env.USERS_PORT || 3002;
 
 import database from "./database.js";
 import routesUsers from "./routes/routesUser.js";
